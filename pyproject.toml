@@ -11,3 +11,9 @@ dependencies = [
     "djangorestframework-simplejwt>=5.5.1",
     "pillow>=12.1.0",
 ]
+
+[dependency-groups]
+dev = [
+    "django-stubs>=5.2.8",
+    "djangorestframework-stubs>=3.16.7",
+]
