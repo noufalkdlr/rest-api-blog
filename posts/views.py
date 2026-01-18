@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
+from .permissions import IsOwnerOrReadOnly
 
 
 class PostListCreateView(ListCreateAPIView):
@@ -28,7 +29,7 @@ class PostListCreateView(ListCreateAPIView):
 class PostDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
     lookup_field = "slug"
 
 
@@ -38,7 +39,7 @@ class CommentListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         slug = self.kwargs["post_slug"]
-        return Comment.objects.filter(post=slug)
+        return Comment.objects.filter(post__slug=slug)
 
     def perform_create(self, serializer):
         slug = self.kwargs["post_slug"]

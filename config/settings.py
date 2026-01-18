@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "django_filters",
+    "drf_spectacular",
     "users",
     "posts",
 ]
@@ -140,6 +141,13 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 5,
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {"anon": "5/minute", "user": "20/minute"},
+    # Swagger ui
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # JWT Settings
@@ -147,4 +155,11 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "REST Framework Blog API",
+    "DESCRIPTION": "A robust, production-ready RESTful API for content management built with Django 5 and DRF. Features include JWT authentication, optimized database queries, and modular architecture.",
+    "VERSION": "1.0.0",
 }
