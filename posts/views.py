@@ -29,6 +29,7 @@ class PostDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]
+    lookup_field = "slug"
 
 
 class CommentListCreateView(ListCreateAPIView):
@@ -36,10 +37,10 @@ class CommentListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        post_id = self.kwargs["post_id"]
-        return Comment.objects.filter(post=post_id)
+        slug = self.kwargs["slug"]
+        return Comment.objects.filter(post=slug)
 
     def perform_create(self, serializer):
-        post_id = self.kwargs["post_id"]
-        post = get_object_or_404(Post, pk=post_id)
+        slug = self.kwargs["slug"]
+        post = get_object_or_404(Post, pk=slug)
         return serializer.save(author=self.request.user, post=post)

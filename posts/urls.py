@@ -3,9 +3,9 @@ from .views import PostListCreateView, PostDetailView, CommentListCreateView
 
 urlpatterns = [
     path("posts/", PostListCreateView.as_view(), name="posts-list-create"),
-    path("post/<int:pk>/", PostDetailView.as_view(), name="post-detail"),
+    path("post/<slug:slug>/", PostDetailView.as_view(), name="post-detail"),
     path(
-        "posts/<int:post_id>/comments",
+        "posts/<slug:slug>/comments/",
         CommentListCreateView.as_view(),
         name="post-comments",
     ),
