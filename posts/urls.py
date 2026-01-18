@@ -5,7 +5,7 @@ urlpatterns = [
     path("posts/", PostListCreateView.as_view(), name="posts-list-create"),
     path("post/<slug:slug>/", PostDetailView.as_view(), name="post-detail"),
     path(
-        "posts/<slug:slug>/comments/",
+        "posts/<slug:post_slug>/comments/",
         CommentListCreateView.as_view(),
         name="post-comments",
     ),
