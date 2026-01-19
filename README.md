@@ -2,6 +2,10 @@
 
 A robust, production-ready RESTful API for content management built with Django 6 and Django REST Framework (DRF). This project is designed with a modular architecture focusing on security, scalability, and optimized database performance.
 
+**🚀 Deployed on Google Cloud Run with NeonDB (PostgreSQL)**
+
+[**🔗 Live API Documentation (Swagger UI)**](https://rest-api-blog-383832633879.us-central1.run.app/api/schema/swagger-ui/)
+
 ## 🚀 Key Features
 
 * **JWT Authentication**: Secure user registration, login, and token refresh mechanisms using `SimpleJWT`.
