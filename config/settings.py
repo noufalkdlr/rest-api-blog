@@ -28,6 +28,11 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
+# Cloud Run URL for CSRF protection
+CSRF_TRUSTED_ORIGINS = [
+    "https://rest-api-blog-383832633879.us-central1.run.app",
+]
+
 
 # Application definition
 
