@@ -28,5 +28,9 @@ RUN python manage.py collectstatic --noinput
 ENV PYTHONUNBUFFERED=1
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Run command (Port 8080 is default for Cloud Run)
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8080"]
+# Copy and prepare the entrypoint script
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
+# Use the entrypoint script to run migrations and start the server
+CMD ["./entrypoint.sh"]
