@@ -18,19 +18,19 @@ COPY pyproject.toml uv.lock ./
 # Install dependencies
 RUN uv sync --frozen --no-install-project
 
-# Copy project files
-COPY . .
-
-# Collect static files
-RUN python manage.py collectstatic --noinput
-
 # Environment setup
 ENV PYTHONUNBUFFERED=1
 ENV PATH="/app/.venv/bin:$PATH"
+
+# Copy project files
+COPY . .
+
+# Now collectstatic will find Django in the virtual environment
+RUN python manage.py collectstatic --noinput
 
 # Copy and prepare the entrypoint script
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
-# Use the entrypoint script to run migrations and start the server
+# Run command
 CMD ["./entrypoint.sh"]
